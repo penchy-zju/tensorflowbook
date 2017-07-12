@@ -1,4 +1,4 @@
-TensorFlow progress so fast that many code in this book can not run anymore because of deperating of some api, so I fork this project so make sure all code is runnable while my own learningship of TensorFlow
+TensorFlow evolves so fast that many code in this book can not run anymore because of deperating of some api, so I fork this project to make sure that all code is runnable while my own learningship of TensorFlow
 * TensorFlow: 1.1.0
 
 ----------------------------------------------------------------------------------------
