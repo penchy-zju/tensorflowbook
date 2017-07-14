@@ -22,4 +22,4 @@ writer.close()
 sess.close()
 
 # To start TensorBoard after running this file, execute the following command:
-# $ tensorboard --logdir='./my_graph'
+# $ tensorboard --logdir=./my_graph

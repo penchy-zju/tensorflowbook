@@ -54,7 +54,7 @@ def inputs():
 
     # Pack all the features that we care about in a single matrix;
     # We then transpose to have a matrix with one example per row and one feature per column.
-    features = tf.transpose(tf.pack([sepal_length, sepal_width, petal_length, petal_width]))
+    features = tf.transpose(tf.stack([sepal_length, sepal_width, petal_length, petal_width]))
 
     return features, label_number
 
@@ -68,7 +68,7 @@ def evaluate(sess, X, Y):
 
     predicted = tf.cast(tf.arg_max(inference(X), 1), tf.int32)
 
-    print sess.run(tf.reduce_mean(tf.cast(tf.equal(predicted, Y), tf.float32)))
+    print(sess.run(tf.reduce_mean(tf.cast(tf.equal(predicted, Y), tf.float32))))
 
 
 # Launch the graph in a session, setup boilerplate
@@ -90,7 +90,7 @@ with tf.Session() as sess:
         sess.run([train_op])
         # for debugging and learning purposes, see how the loss gets decremented thru training steps
         if step % 10 == 0:
-            print "loss: ", sess.run([total_loss])
+            print("loss: ", sess.run([total_loss]))
 
     evaluate(sess, X, Y)
 

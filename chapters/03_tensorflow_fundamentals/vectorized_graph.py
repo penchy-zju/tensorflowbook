@@ -1,5 +1,4 @@
 import tensorflow as tf
-import numpy as np
 
 # Explicitly create a Graph object
 graph = tf.Graph()
@@ -35,14 +34,14 @@ with graph.as_default():
 
     # Summary Operations
     with tf.name_scope("summaries"):
-        tf.scalar_summary(b'output', output, name="output_summary")  # Creates summary for output node
-        tf.scalar_summary(b'product of inputs', b, name="prod_summary")
-        tf.scalar_summary(b'sum of inputs', c, name="sum_summary")
+        tf.summary.scalar(tensor=output, name="output_summary")  # Creates summary for output node
+        tf.summary.scalar(tensor=b, name="prod_summary")
+        tf.summary.scalar(tensor=c, name="sum_summary")
 
     # Global Variables and Operations
     with tf.name_scope("global_ops"):
         # Initialization Op
-        init = tf.initialize_all_variables()
+        init = tf.global_variables_initializer()
         # Collect all summary Ops in graph
         merged_summaries = tf.summary.merge_all()
 
@@ -62,6 +61,7 @@ def run_graph(input_tensor):
     """
     feed_dict = {a: input_tensor}
     output, summary, step = sess.run([update_prev, merged_summaries, increment_step], feed_dict=feed_dict)
+    print(output)
     writer.add_summary(summary, global_step=step)
 
 
@@ -87,4 +87,4 @@ writer.close()
 sess.close()
 
 # To start TensorBoard after running this file, execute the following command:
-# $ tensorboard --logdir='./improved_graph'
+# $ tensorboard --logdir=./improved_graph

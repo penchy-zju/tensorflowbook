@@ -41,13 +41,18 @@ with graph.as_default():
 
     out = tf.maximum(C_out, D_out)
 
-writer = tf.train.SummaryWriter('./name_scope_2', graph=graph)
+writer = tf.summary.FileWriter('./name_scope_2', graph=graph)
 writer.close()
+
+with tf.Session(graph=graph) as sess:
+    feed_dict = {in_1: 1, in_2: 2}
+    o = sess.run(out, feed_dict=feed_dict)
+    print(o)
 
 # To start TensorBoard after running this file, execute the following command:
 
 # For Example 1
-# $ tensorboard --logdir='./name_scope_1'
+# $ tensorboard --logdir=./name_scope_1
 
 # For Example 2
-# $ tensorboard --logdir='./name_scope_2'
+# $ tensorboard --logdir=./name_scope_2
