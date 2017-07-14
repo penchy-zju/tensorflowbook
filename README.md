@@ -1,6 +1,19 @@
 TensorFlow evolves so fast that many code in this book can not run anymore because of deperating of some api, so I fork this project to make sure that all code is runnable while my own learningship of TensorFlow
 * TensorFlow: 1.1.0
 
+### API Update
+```
+tf.mul --> tf.multiply
+tf.sub --> tf.subtract
+
+tf.train.SummaryWriter --> tf.summary.FileWriter
+tf.scalar_summary --> tf.summary.scalar
+tf.merge_all_summaries --> tf.summary.merge_all
+
+tf.initialize_all_variables --> tf.global_variables_initializer
+tf.pack --> tf.stack
+```
+
 ----------------------------------------------------------------------------------------
 
 # _TensorFlow for Machine Intelligence_
