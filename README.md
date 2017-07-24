@@ -17,7 +17,7 @@ tf.pack --> tf.stack
 
 ----------------------------------------------------------------------------------------
 
-# _TensorFlow for Machine Intelligence_
+# `TensorFlow for Machine Intelligence`
 
 ![TensorFlow for Machine Intelligence book cover](img/book_cover.jpg)
 
