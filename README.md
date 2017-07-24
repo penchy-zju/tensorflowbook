@@ -1,6 +1,6 @@
 ### Motivation
 TensorFlow evolves so fast that many code in this book can not run anymore because of deprecating of some api, so I fork this project to make sure that all code is runnable while my own learningship of TensorFlow
-* TensorFlow: 1.1.0
+* `TensorFlow: 1.1.0`
 
 ### API Update
 ```
