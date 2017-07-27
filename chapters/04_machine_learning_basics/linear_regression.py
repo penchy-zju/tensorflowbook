@@ -2,7 +2,7 @@
 
 import tensorflow as tf
 
-W = tf.Variable(tf.zeros([2, 1]), name="weights")
+W = tf.Variable(tf.random_uniform(shape=[2, 1], minval=-1, maxval=1), name="weights")
 b = tf.Variable(0., name="bias")
 
 
@@ -17,8 +17,11 @@ def loss(X, Y):
 
 def inputs():
     # Data from http://people.sc.fsu.edu/~jburkardt/datasets/regression/x09.txt
-    weight_age = [[84, 46], [73, 20], [65, 52], [70, 30], [76, 57], [69, 25], [63, 28], [72, 36], [79, 57], [75, 44], [27, 24], [89, 31], [65, 52], [57, 23], [59, 60], [69, 48], [60, 34], [79, 51], [75, 50], [82, 34], [59, 46], [67, 23], [85, 37], [55, 40], [63, 30]]
-    blood_fat_content = [354, 190, 405, 263, 451, 302, 288, 385, 402, 365, 209, 290, 346, 254, 395, 434, 220, 374, 308, 220, 311, 181, 274, 303, 244]
+    weight_age = [[84, 46], [73, 20], [65, 52], [70, 30], [76, 57], [69, 25], [63, 28], [72, 36], [79, 57], [75, 44],
+                  [27, 24], [89, 31], [65, 52], [57, 23], [59, 60], [69, 48], [60, 34], [79, 51], [75, 50], [82, 34],
+                  [59, 46], [67, 23], [85, 37], [55, 40], [63, 30]]
+    blood_fat_content = [354, 190, 405, 263, 451, 302, 288, 385, 402, 365, 209, 290, 346, 254, 395, 434, 220, 374, 308,
+                         220, 311, 181, 274, 303, 244]
 
     return tf.to_float(weight_age), tf.to_float(blood_fat_content)
 
@@ -29,13 +32,13 @@ def train(total_loss):
 
 
 def evaluate(sess, X, Y):
-    print(sess.run(inference([[80., 25.]]))) # ~ 303
-    print(sess.run(inference([[65., 25.]]))) # ~ 256
+    print(sess.run(inference([[80., 25.]])))  # ~ 303
+    print(sess.run(inference([[65., 25.]])))  # ~ 256
+
 
 # Launch the graph in a session, setup boilerplate
 with tf.Session() as sess:
-
-    tf.initialize_all_variables().run()
+    tf.global_variables_initializer().run()
 
     X, Y = inputs()
 
@@ -45,6 +48,7 @@ with tf.Session() as sess:
     coord = tf.train.Coordinator()
     threads = tf.train.start_queue_runners(sess=sess, coord=coord)
 
+    writer = tf.summary.FileWriter('./linear_graph', sess.graph)
     # actual training loop
     training_steps = 1000
     for step in range(training_steps):
@@ -56,6 +60,5 @@ with tf.Session() as sess:
 
     coord.request_stop()
     coord.join(threads)
+    writer.close()
     sess.close()
-
-
