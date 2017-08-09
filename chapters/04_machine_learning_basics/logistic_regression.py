@@ -20,7 +20,7 @@ def inference(X):
 
 
 def loss(X, Y):
-    return tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(combine_inputs(X), Y))
+    return tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=combine_inputs(X), labels=Y))
 
 
 def read_csv(batch_size, file_name, record_defaults):
@@ -84,6 +84,7 @@ with tf.Session() as sess:
     coord = tf.train.Coordinator()
     threads = tf.train.start_queue_runners(sess=sess, coord=coord)
 
+    writer = tf.summary.FileWriter('./logistic_graph', sess.graph)
     # actual training loop
     training_steps = 1000
     for step in range(training_steps):
@@ -99,4 +100,5 @@ with tf.Session() as sess:
 
     coord.request_stop()
     coord.join(threads)
+    writer.close()
     sess.close()
