@@ -46,7 +46,7 @@ def inputs():
         read_csv(100, "iris.data", [[0.0], [0.0], [0.0], [0.0], [""]])
 
     # convert class names to a 0 based class index.
-    label_number = tf.to_int32(tf.argmax(tf.to_int32(tf.pack([
+    label_number = tf.to_int32(tf.argmax(tf.to_int32(tf.stack([
         tf.equal(label, ["Iris-setosa"]),
         tf.equal(label, ["Iris-versicolor"]),
         tf.equal(label, ["Iris-virginica"])
@@ -74,7 +74,7 @@ def evaluate(sess, X, Y):
 # Launch the graph in a session, setup boilerplate
 with tf.Session() as sess:
 
-    tf.initialize_all_variables().run()
+    tf.global_variables_initializer().run()
 
     X, Y = inputs()
 

@@ -12,7 +12,7 @@ def inference(X):
 
 def loss(X, Y):
     Y_predicted = inference(X)
-    return tf.reduce_sum(tf.squared_difference(Y, Y_predicted))
+    return tf.reduce_mean(tf.squared_difference(Y, Y_predicted))
 
 
 def inputs():
@@ -27,7 +27,7 @@ def inputs():
 
 
 def train(total_loss):
-    learning_rate = 0.0000001
+    learning_rate = 0.000001
     return tf.train.GradientDescentOptimizer(learning_rate).minimize(total_loss)
 
 
