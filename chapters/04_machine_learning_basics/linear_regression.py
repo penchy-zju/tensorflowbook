@@ -54,7 +54,7 @@ with tf.Session() as sess:
     for step in range(training_steps):
         sess.run([train_op])
         if step % 10 == 0:
-            print("loss: ", sess.run([total_loss]))
+            print("iteration %d loss: %.5f" % (step, sess.run(total_loss)))
 
     evaluate(sess, X, Y)
 
